@@ -1,8 +1,6 @@
-// //////////// https://api.quotable.io/random
-
 import "./style.css";
 import { useState } from "react";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import bxCopyright from "@iconify/icons-bx/bx-copyright";
 
 function App() {
