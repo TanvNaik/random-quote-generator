@@ -4,4 +4,4 @@ Live: https://tanvnaik.github.io/random-quote-generator/
 
 ## Figma Design:
 
-(/figmaDesign.png)
+![design](/figmaDesign.png)
