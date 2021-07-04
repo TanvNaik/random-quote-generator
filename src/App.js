@@ -1,51 +1,61 @@
-import "./App.css";
+// //////////// https://api.quotable.io/random
+
+import "./style.css";
 import { useState } from "react";
+import { Icon, InlineIcon } from "@iconify/react";
+import bxCopyright from "@iconify/icons-bx/bx-copyright";
 
 function App() {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const getQuote = () => {
-    fetch("https://quotes15.p.rapidapi.com/quotes/random/", {
-      method: "GET",
-      headers: {
-        "x-rapidapi-key": "c174b57f5bmsh8d775e9f7915ac2p10aa85jsndd096de00416",
-        "x-rapidapi-host": "quotes15.p.rapidapi.com"
-      }
-    })
-      .then((response) => response.json())
+    setLoading(true);
+    fetch("https://api.quotable.io/random/")
+      .then((response) => {
+        return response.json();
+      })
       .then((res) => {
-        wordCount(res.content);
+        console.log(res);
+        console.log(res.content);
+        console.log(res.author);
         setQuote(res.content);
-        setAuthor(res.originator.name);
+        setAuthor(res.author);
       })
       .catch((err) => {
         console.error(err);
       });
   };
-  function wordCount(str) {
-    if (str.split(" ").length > 30) {
-      getQuote();
+  const showQuote = () => {
+    if (quote) {
+      return (
+        <div className='main'>
+          <div className='quote'>" {quote} "</div>
+          <div className='author'>~ {author}</div>
+        </div>
+      );
     }
-  }
+  };
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1> Random Quote Generator</h1>
-      </header>
-      <div className='main'>
-        <button onClick={getQuote}>Get Quote</button>
-        <b>
-          <div className='quote'>
-            {quote !== "" && (
-              <h4>
-                {quote}
-                <br />- {author}
-              </h4>
-            )}
-          </div>
-        </b>
+    <div className='outer'>
+      <div className='inner'>
+        <div className='header'>
+          <h1>Random Quote Generator</h1>
+        </div>
+        <div className='btn-div'>
+          <button className='btn' onClick={getQuote}>
+            Get Quote
+          </button>
+        </div>
+        {showQuote()}
+      </div>
+      <div className='copyright'>
+        <Icon icon={bxCopyright} id='icon' />
+        <a href='https://github.com/TanvNaik' target='_blank'>
+          Tanvi Naik
+        </a>
       </div>
     </div>
   );
