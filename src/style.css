@@ -70,7 +70,8 @@ body {
 }
 .author {
   float: right;
-  margin-right: 3%;
+  margin-right: 5%;
+  margin-bottom: 3%;
   font-size: 1rem;
 }
 .copyright {
@@ -90,7 +91,9 @@ a {
   top: 2px;
   left: 5px;
 }
-
+.loader {
+  margin: 1%;
+}
 @media only screen and (max-width: 600px) {
   .outer {
     position: static;
