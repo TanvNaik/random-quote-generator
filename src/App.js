@@ -2,6 +2,7 @@ import "./style.css";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import bxCopyright from "@iconify/icons-bx/bx-copyright";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
   const [quote, setQuote] = useState("");
@@ -15,14 +16,9 @@ function App() {
         return response.json();
       })
       .then((res) => {
-        console.log(res);
-        console.log(res.content);
-        console.log(res.author);
         setQuote(res.content);
         setAuthor(res.author);
-      })
-      .catch((err) => {
-        console.error(err);
+        setLoading(false);
       });
   };
   const showQuote = () => {
@@ -47,6 +43,7 @@ function App() {
             Get Quote
           </button>
         </div>
+        <ClipLoader class='loader' loading={loading} color='#28527a' />
         {showQuote()}
       </div>
       <div className='copyright'>
